@@ -2,7 +2,6 @@
 import argparse
 import requests
 from requests.auth import HTTPBasicAuth
-from tabulate import tabulate
 import pprint
 
 
