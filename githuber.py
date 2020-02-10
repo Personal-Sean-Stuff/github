@@ -2,7 +2,6 @@
 import argparse
 import requests
 from requests.auth import HTTPBasicAuth
-import pprint
 
 
 def returnDict(username, password, org):
