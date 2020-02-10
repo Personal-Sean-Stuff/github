@@ -2,6 +2,8 @@
 import argparse
 import requests
 from requests.auth import HTTPBasicAuth
+from tabulate import tabulate
+import pprint
 
 
 def returnDict(username, password, org):
@@ -34,8 +36,12 @@ def main():
     parser.add_argument('user', help='GitHub user name')
     parser.add_argument('password', help='GitHub password')
     args = parser.parse_args()
-    print(returnDict(args.user, args.password, args.org))
+    final_dict = returnDict(args.user, args.password, args.org)
+    print('{:<8} | {:<15}'.format('Repo Name', 'Branch Number'))
+    for k, v in final_dict.items():
+        print("{:<8}  | {:<15}".format(k, v))
 
 
 if __name__ == "__main__":
     main()
+
