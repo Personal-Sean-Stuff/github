@@ -5,15 +5,18 @@ from requests.auth import HTTPBasicAuth
 
 
 def returnDict(username, password, org):
+    """Get the repo names from the organization 
+    and use findBranches to count the number of branches in each repository
+    """
     final_dict = {}
     repositories = requests.get('https://api.github.com/orgs/{}/repos'.format(org),
                                 auth=HTTPBasicAuth(username, password)).json()
     for repo in repositories:
-        final_dict[repo['name']] = findBranchs(username, password, repo['name'], repo['owner']['login'])
+        final_dict[repo['name']] = findBranches(username, password, repo['name'], repo['owner']['login'])
     return final_dict
 
 
-def findBranchs(username, password, repo_name, owner):
+def findBranches(username, password, repo_name, owner):
     count = 0
     branches = requests.get('https://api.github.com/repos/{}/{}/branches'.format(owner, repo_name),
                             auth=HTTPBasicAuth(username, password)).json()
