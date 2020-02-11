@@ -2,6 +2,7 @@
 import argparse
 import requests
 from requests.auth import HTTPBasicAuth
+from getpass import getpass
 
 
 def returnDict(username, password, org):
@@ -32,9 +33,10 @@ def main():
     parser = argparse.ArgumentParser(description='Process the variables')
     parser.add_argument('org', help='GitHub organization name')
     parser.add_argument('user', help='GitHub user name')
-    parser.add_argument('password', help='GitHub password')
+    # parser.add_argument('password', help='GitHub password')
+    password = getpass("password: ")
     args = parser.parse_args()
-    final_dict = returnDict(args.user, args.password, args.org)
+    final_dict = returnDict(args.user, password, args.org)
     print('{:<8} | {:<15}'.format('Repo Name', 'Branch Number'))
     for k, v in final_dict.items():
         print("{:<8}  | {:<15}".format(k, v))
@@ -42,4 +44,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
